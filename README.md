@@ -1,46 +1,93 @@
-# Elastic WordPress Evolution – AWS Architecture Lab
+# 🏗️ Elastic WordPress Evolution – AWS Architecture Lab
 
-## 📌 Project Summary
-This project demonstrates the design and deployment of a highly available, auto-scaling WordPress application on AWS. It simulates a real-world cloud infrastructure for hosting web applications using services like EC2, RDS (Multi-AZ), Elastic Load Balancer, S3, and CloudFormation.
+This project demonstrates how to deploy a **highly available**, **scalable**, and **secure WordPress environment** on AWS using core services such as EC2, RDS (Multi-AZ), S3, and CloudFormation. It is ideal for learning and showcasing real-world cloud architecture for hosting dynamic web applications.
 
-## 🔧 Tools & Technologies Used
-- Amazon EC2 (Amazon Linux 2)
-- Elastic Load Balancer (ALB)
-- Amazon RDS (MySQL, Multi-AZ)
-- Amazon S3
-- Virtual Private Cloud (VPC)
-- IAM Roles & Security Groups
-- CloudFormation
-- Auto Scaling Groups
-- Route 53
-- CloudWatch
-- Bash Scripts
+---
 
-## ⚙️ Architecture Overview
-1. Custom VPC with public and private subnets.
-2. EC2 instances launched with User Data scripts for automated WordPress installation.
-3. Application Load Balancer to manage traffic across EC2 instances.
-4. RDS Multi-AZ MySQL for high availability database.
-5. S3 used for shared content storage with lifecycle management policies.
-6. CloudFormation templates for infrastructure automation.
-7. IAM roles for secure access and resource permissions.
-8. Route 53 for DNS routing and CloudWatch for performance monitoring.
+## 📌 Table of Contents
+- [Architecture Overview](#architecture-overview)
+- [Key Features](#key-features)
+- [AWS Services Used](#aws-services-used)
+- [Deployment Steps](#deployment-steps)
+- [Security Practices](#security-practices)
+- [Challenges Faced](#challenges-faced)
+- [Author](#author)
 
-## 📁 Project Files (What’s Included)
-- Word documents explaining the full implementation.
-- CloudFormation scripts (optional if uploaded).
-- Screenshots of key configuration steps and dashboard views.
-- `README.md` to guide users on the setup and usage.
+---
 
-## ✅ Key Learning Outcomes
-- Understanding of AWS infrastructure design for web hosting.
-- Real-world WordPress deployment architecture.
-- Integration between EC2 and RDS via secure configuration.
-- Troubleshooting Linux server issues and configuring services.
-- Writing reusable infrastructure-as-code using CloudFormation.
+## 🏛️ Architecture Overview
 
-## 📸 Recommended Additions
-To make this repository even more helpful for viewers:
-- Add `screenshots/` folder with terminal, EC2, WordPress dashboard images
-- Include the bash script used in EC2 User Data
-- Add example `cloudformation-template.yaml` (if available)
+```
+User ↔️ Route 53 (DNS)
+     ↕
+ALB (Load Balancer)
+     ↕
+Auto Scaling Group
+     ↕
+EC2 Instances (Apache + WordPress + PHP)
+     ↕
+Amazon RDS (MySQL, Multi-AZ)
+     ↕
+Amazon S3 (shared media content)
+```
+
+All components are inside a custom **VPC** with public and private subnets, NAT Gateway, and Internet Gateway.
+
+---
+
+## ✨ Key Features
+- High availability using **Multi-AZ RDS**
+- Auto-scaling and fault tolerance with **EC2 + ALB**
+- Shared media storage on **S3**
+- Infrastructure as Code using **CloudFormation**
+- Monitoring via **CloudWatch**
+- Fine-grained access control with **IAM** and **Security Groups**
+
+---
+
+## 🧰 AWS Services Used
+- EC2 (Amazon Linux 2)
+- RDS (MySQL, Multi-AZ)
+- S3 (static file hosting)
+- CloudFormation (infrastructure provisioning)
+- IAM (permissions & roles)
+- VPC (custom networking)
+- Security Groups (firewall rules)
+- Route 53 (optional DNS)
+- CloudWatch (logs & monitoring)
+
+---
+
+## 🚀 Deployment Steps (High Level)
+1. Launch RDS with MySQL, enable Multi-AZ.
+2. Create S3 bucket for media storage.
+3. Deploy EC2 instance with Apache + WordPress via user data script.
+4. Configure ALB and Auto Scaling Group via Launch Template.
+5. Use CloudFormation to automate infrastructure provisioning.
+6. Edit wp-config.php to connect WordPress to RDS.
+7. Access WordPress via browser and complete the setup.
+
+---
+
+## 🔒 Security Practices
+- Restricted inbound rules via Security Groups
+- Private subnets for RDS
+- Password-based authentication for DB
+- IAM role policies scoped to least privilege
+- Lifecycle rules for S3 cleanup
+
+---
+
+## 🧗 Challenges Faced
+- Troubleshooting “Error establishing database connection”
+- Editing `wp-config.php` correctly for external RDS
+- Configuring user data for Apache + PHP
+- Granting MySQL user permissions via terminal
+
+---
+
+## 👩‍💻 Author
+
+**Sonali Gupta**  
+GitHub: [Sonalii3129](https://github.com/Sonalii3129)  
+LinkedIn: [linkedin.com/in/sonalii3129](https://linkedin.com/in/sonalii3129)  
